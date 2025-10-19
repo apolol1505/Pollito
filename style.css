@@ -953,3 +953,108 @@ section:hover {
     background: #45B7AA;
     transform: translateY(-3px);
 }
+
+/* ========= Media Queries for Responsiveness ========= */
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto; /* Allow scrolling on mobile */
+        height: auto;
+        padding: 10px;
+    }
+
+    .container {
+        height: auto;
+        padding: 10px;
+    }
+
+    .game-main {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .game-header {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .game-title {
+        font-size: 1.8em;
+    }
+
+    .game-subtitle {
+        font-size: 1em;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    .week-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .timer-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .timer-time {
+        font-size: 2.5em;
+    }
+
+    .chicken-image {
+        font-size: 5em;
+    }
+
+    .chicken-name {
+        font-size: 1.5em;
+    }
+
+    .actions-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .action-card {
+        flex-direction: column;
+        padding: 10px;
+        gap: 5px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .action-icon {
+        font-size: 2.5em;
+        min-width: auto;
+    }
+
+    .action-label {
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    .menu-container {
+        padding: 20px;
+    }
+
+    .menu-title {
+        font-size: 2.5em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .top-right-button-container {
+        top: 10px;
+        right: 10px;
+    }
+
+    #backToMenuBtn {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+}
