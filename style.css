@@ -1,0 +1,955 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-image: url('src/images/bck.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #2c3e50;
+    overflow: hidden;
+    /* Evita el scroll */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    /* Aumentado para más espacio */
+    height: 95vh;
+    /* Ocupa casi toda la altura de la ventana */
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    justify-content: center; /* Center the title group */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 15px; /* Reducido */
+    background: rgba(255, 255, 255, 0.75); /* Más transparente */
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0; /* Evita que el header se encoja */
+}
+
+.game-header .header-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-grow: 1; Removed as it's no longer needed to push the button */
+}
+
+.game-header .game-title, .game-header .game-subtitle {
+    margin: 0; /* Remove default margins to prevent layout issues with flex */
+}
+
+.top-right-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100; /* Ensure it's above other content */
+}
+
+#backToMenuBtn {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    background: linear-gradient(135deg, #FFB347, #FF9800);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    z-index: 101; /* Ensure it's above other content, higher than .top-right-button-container */
+}
+
+
+
+#backToMenuBtn:hover {
+
+    background: linear-gradient(135deg, #FF9800, #E68A00);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+}
+
+.game-main {
+    flex-grow: 1;
+    /* Ocupa el espacio restante */
+    display: flex;
+    gap: 20px;
+    /* Espacio entre secciones */
+    overflow: hidden;
+    /* Previene desbordamiento interno */
+}
+
+.game-title {
+    font-size: 2.5em;
+    /* Reducido */
+    font-weight: 700;
+    color: #FF6B6B;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.game-subtitle {
+    font-size: 1.3em;
+    color: #000000;
+    font-weight: 500;
+}
+
+#rulesModal .modal-content p {
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+/* Secciones generales */
+section {
+    background: rgba(255, 255, 255, 0.75);
+    /* Más transparente */
+    margin-bottom: 0;
+    /* Eliminado */
+    padding: 15px;
+    /* Reducido */
+    border-radius: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    /* Cada sección ocupa el mismo espacio */
+    display: flex;
+    flex-direction: column;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Temporizador */
+.timer-card {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.week-title {
+    font-size: 2.2em;
+    color: #FF6B6B;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.week-number {
+    color: #4ECDC4;
+    font-size: 1.2em;
+}
+
+/* Temporizador Visual Grande */
+.main-timer {
+    margin: 20px 0;
+    /* Reducido */
+    display: flex;
+    justify-content: center;
+}
+
+.timer-circle {
+    position: relative;
+    width: 150px;
+    /* Reducido */
+    height: 150px;
+    /* Reducido */
+}
+
+.timer-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+}
+
+.timer-time {
+    font-size: 3em;
+    font-weight: 700;
+    color: #FF6B6B;
+    line-height: 1;
+}
+
+.timer-label {
+    font-size: 1em;
+    color: #4ECDC4;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.timer-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 8;
+}
+
+.timer-progress {
+    fill: none;
+    stroke: #4ECDC4;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.timer-circle.warning .timer-progress {
+    stroke: #FFB347;
+}
+
+.timer-circle.danger .timer-progress {
+    stroke: #FF6B6B;
+    animation: pulse-red 1s infinite;
+}
+
+@keyframes pulse-red {
+
+    0%,
+    100% {
+        stroke: #FF6B6B;
+    }
+
+    50% {
+        stroke: #FF8E8E;
+    }
+}
+
+.weekly-progress {
+    margin-top: 20px;
+}
+
+.progress-container {
+    background: rgba(255, 255, 255, 0.6);
+    /* Más transparente */
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid #FFE5B4;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(90deg, #FFE5B4, #FFC0CB);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ECDC4, #45B7AA);
+    width: 25%;
+    transition: width 0.8s ease;
+    border-radius: 15px;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.days-remaining {
+    font-size: 1.2em;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Pollo Animado */
+.chicken-section {
+    text-align: center;
+    padding: 10px;
+    /* Reducido */
+    justify-content: center;
+    /* Centra verticalmente el contenido */
+}
+
+.chicken-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    /* Eliminado */
+}
+
+.chicken-stage {
+    position: relative;
+    padding: 20px;
+    /* Reducido */
+    background: linear-gradient(135deg, #FFE5B4, #FFC0CB);
+    border-radius: 50%;
+    border: 5px solid #FF6B6B;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+}
+
+.chicken-stage:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.chicken-image {
+    position: relative;
+    font-size: 6em;
+    /* Reducido */
+    margin-bottom: 10px;
+    /* Reducido */
+    transition: all 0.5s ease;
+}
+
+.chicken-body {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.chicken-effects {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chicken-image.happy .chicken-effects {
+    opacity: 1;
+    animation: sparkle 1s ease-in-out;
+}
+
+.chicken-image.sick .chicken-effects {
+    opacity: 1;
+    animation: sickEffect 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+    }
+}
+
+@keyframes sickEffect {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotate(5deg);
+    }
+}
+
+.chicken-name {
+    font-size: 1.8em;
+    color: #FF6B6B;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.chicken-status {
+    font-size: 1.2em;
+    color: #4ECDC4;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.6);
+    /* Más transparente */
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Panel de Acciones */
+.actions-section {
+    justify-content: center;
+}
+
+.actions-title {
+    text-align: center;
+    font-size: 1.5em;
+    /* Reducido */
+    color: #FF6B6B;
+    margin-bottom: 15px;
+    /* Reducido */
+    font-weight: 600;
+}
+
+.actions-grid {
+    display: flex;
+    /* Cambiado de grid */
+    flex-direction: column;
+    /* Apila los botones */
+    gap: 10px;
+    /* Espacio reducido */
+    justify-content: center;
+    height: 100%;
+}
+
+.action-card {
+    background: rgba(255, 255, 255, 0.7);
+    /* Más transparente */
+    padding: 10px;
+    /* Reducido */
+    border-radius: 20px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+/* Estilos para la barra de progreso de arrastre */
+.hold-progress-bar {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.chicken-stage.drag-over .hold-progress-bar {
+    opacity: 1;
+}
+
+.hold-progress-fill {
+    width: 0%;
+    height: 100%;
+    background-color: #4ECDC4;
+    border-radius: 5px;
+}
+
+@keyframes holdProgress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.action-card:active {
+    transform: translateY(-2px);
+}
+
+@keyframes happy-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-8px) scale(1.05);
+    }
+}
+
+.happy-animation {
+    animation: happy-bounce 0.5s ease-in-out;
+}
+
+.feed-action {
+    border-color: #FFB347;
+}
+
+.feed-action:hover {
+    background: linear-gradient(135deg, #FFF5E6, #FFE5B4);
+}
+
+.water-action {
+    border-color: #87CEEB;
+}
+
+.water-action:hover {
+    background: linear-gradient(135deg, #E6F3FF, #B3E5FC);
+}
+
+.medicine-action {
+    border-color: #FF6B6B;
+}
+
+.medicine-action:hover {
+    background: linear-gradient(135deg, #FFE6E6, #FFB3B3);
+}
+
+.action-icon {
+    font-size: 3em;
+    min-width: 80px;
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.action-icon:active {
+    cursor: grabbing;
+    transform: scale(0.9);
+}
+
+.draggable {
+    user-select: none;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+    z-index: 1000;
+}
+
+.drag-instructions {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.chicken-stage.drag-over {
+    transform: scale(1.1);
+    box-shadow: 0 20px 50px rgba(78, 205, 196, 0.4);
+    border-color: #4ECDC4;
+}
+
+.action-info {
+    flex: 1;
+}
+
+.action-label {
+    display: block;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.action-counter {
+    font-size: 1em;
+    color: #666;
+    font-weight: 500;
+}
+
+.action-card:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Estilo para el mensaje de advertencia de descuido */
+.neglect-warning {
+    display: none;
+    /* Oculto por defecto */
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(255, 107, 107, 0.75);
+    color: white;
+    font-weight: 600;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ========= ESTILOS DE MODALES ========= */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-title {
+    font-size: 2em;
+    color: #FF6B6B;
+    margin-bottom: 15px;
+}
+
+.modal-chicken {
+    font-size: 4em;
+    margin: 20px 0;
+    animation: modal-chicken-bounce 2s infinite;
+}
+
+@keyframes modal-chicken-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.modal-btn {
+    background: #4ECDC4;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.modal-btn:hover {
+    background: #45B7AA;
+    transform: translateY(-3px);
+}
+
+/* Colores específicos de modales */
+.modal-content.warning .modal-title {
+    color: #FFB347;
+    /* Naranja */
+}
+
+.modal-content.error .modal-title {
+    color: #FF6B6B;
+    /* Rojo */
+}
+
+.modal-content.success .modal-title {
+    color: #4ECDC4;
+    /* Verde azulado */
+}
+
+#deathStats,
+#finalStats {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* --- Estilos para index.html --- */
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/clouds.png');
+    /* Placeholder cloud texture */
+    opacity: 0.3;
+    animation: moveClouds 60s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes moveClouds {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 1000px 0;
+    }
+}
+
+.menu-container {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    z-index: 10;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.menu-header {
+    margin-bottom: 30px;
+}
+
+.chick-wrap {
+    font-size: 4em;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+.menu-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3.5em;
+    color: #FF6B6B;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #000000;
+    font-weight: 500;
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.menu-btn.primary {
+    background: linear-gradient(135deg, #4ECDC4, #45B7AA);
+}
+
+.menu-btn.primary:hover {
+    background: linear-gradient(135deg, #45B7AA, #3CA094);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn {
+    /* General button style for secondary buttons */
+    background: linear-gradient(135deg, #FFB347, #FF9800);
+}
+
+.menu-btn:hover {
+    background: linear-gradient(135deg, #FF9800, #E68A00);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.eggs-row {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 5;
+}
+
+.egg {
+    width: 40px;
+    height: 50px;
+    background: linear-gradient(to bottom, #FFE5B4, #FFC0CB);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: 2px solid #FF6B6B;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: floatEgg 3s ease-in-out infinite;
+}
+
+.egg.e1 {
+    animation-delay: 0s;
+}
+
+.egg.e2 {
+    animation-delay: 0.5s;
+}
+
+.egg.e3 {
+    animation-delay: 1s;
+}
+
+.egg.e4 {
+    animation-delay: 1.5s;
+}
+
+@keyframes floatEgg {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Modal styles for index.html (reusing game.html modal styles) */
+#rulesModal .modal-content {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+#rulesModal.show .modal-content {
+    transform: scale(1);
+}
+
+#rulesModal .modal-title {
+    font-size: 2em;
+    color: #FF6B6B;
+    margin-bottom: 15px;
+}
+
+#rulesModal .modal-btn {
+    background: #4ECDC4;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+#rulesModal .modal-btn:hover {
+    background: #45B7AA;
+    transform: translateY(-3px);
+}

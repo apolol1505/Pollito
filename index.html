@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal - Mi Pollito Virtual</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="scene">
+        <div class="clouds"></div>
+        <main class="menu-container" role="main" aria-labelledby="title">
+            <header class="menu-header">
+                <div class="chick-wrap" aria-hidden="true">
+                    <div class="chick">🐣</div>
+                </div>
+                <h1 id="title" class="menu-title">Mi Pollito Virtual</h1>
+                <p class="subtitle">Cuídalo durante 4 semanas y ayúdalo a crecer feliz</p>
+            </header>
+
+            <div class="menu-options" role="navigation" aria-label="Opciones del juego">
+                <a href="game.html" class="menu-btn primary" id="playBtn">Jugar</a>
+                <button id="rulesBtn" class="menu-btn" aria-controls="rulesModal">Reglas</button>
+            </div>
+        </main>
+
+        <div id="rulesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" hidden>
+            <div class="modal-content">
+                <h2 id="rulesTitle" class="modal-title">Reglas del Juego</h2>
+                <p>¡Cuida a tu pollito durante 4 semanas!</p>
+                <ul>
+                    <li>Cada semana dura 35 segundos.</li>
+                    <li>Debes alimentar, dar agua y medicinar a tu pollito.</li>
+                    <li>Arrastra la comida y el agua al pollito y mantén por 2 segundos.</li>
+                    <li>Haz clic en la medicina para dársela.</li>
+                    <li>Si no completas las tareas en una semana, el pollito enfermará.</li>
+                    <li>Si fallas dos semanas seguidas, el pollito morirá y el juego terminará.</li>
+                    <li>¡Completa las 4 semanas para ganar!</li>
+                </ul>
+                <div class="modal-actions">
+                    <button class="modal-btn close-modal-btn">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="eggs-row" aria-hidden="true">
+            <div class="egg e1"></div>
+            <div class="egg e2"></div>
+            <div class="egg e3"></div>
+            <div class="egg e4"></div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rulesBtn = document.getElementById('rulesBtn');
+            const rulesModal = document.getElementById('rulesModal');
+            const closeModalBtn = rulesModal.querySelector('.close-modal-btn');
+
+            function openModal() {
+                rulesModal.hidden = false;
+                rulesModal.classList.add('show');
+                closeModalBtn.focus();
+            }
+
+            function closeModal() {
+                rulesModal.classList.remove('show');
+                setTimeout(() => { rulesModal.hidden = true; }, 200);
+                rulesBtn.focus();
+            }
+
+            rulesBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // Cerrar con Escape y clic fuera del contenido
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !rulesModal.hidden) closeModal();
+            });
+
+            rulesModal.addEventListener('pointerdown', (e) => {
+                if (e.target === rulesModal) closeModal();
+            });
+        });
+    </script>
+</body>
+
+</html>

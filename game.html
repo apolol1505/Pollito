@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐣 Mi Pollito Virtual</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="game-header">
+            <div class="header-title-group">
+                <h1 class="game-title">🐣 Mi Pollito Virtual</h1>
+                <p class="game-subtitle">¡Cuida a tu pollito durante 4 semanas!</p>
+            </div>
+        </header>
+
+        <div class="top-right-button-container">
+            <button id="backToMenuBtn" class="menu-btn">Volver al Menú</button>
+        </div>
+
+        <div id="neglectWarningMessage" class="neglect-warning"></div>
+        <div id="timeWarningMessage" class="time-warning"></div>
+
+        <main class="game-main">
+            <!-- Temporizador Semanal -->
+            <section class="timer-section">
+                <div class="timer-card">
+                    <h2 class="week-title">Semana <span id="currentWeek" class="week-number">1</span> de 4</h2>
+
+                    <!-- Temporizador Visual Grande -->
+                    <div class="main-timer">
+                        <div class="timer-circle">
+                            <div class="timer-inner">
+                                <div class="timer-time" id="timerDisplay">30</div>
+                                <div class="timer-label">segundos</div>
+                            </div>
+                            <svg class="timer-svg" viewBox="0 0 120 120">
+                                <circle class="timer-bg" cx="60" cy="60" r="50"></circle>
+                                <circle class="timer-progress" cx="60" cy="60" r="50" id="timerProgress"></circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="weekly-progress">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="weekProgress"></div>
+                            </div>
+                            <div class="progress-days">
+                                <span class="days-remaining">Día <strong id="currentDay">1</strong> de 7</span>
+                                <div class="day-progress">
+                                    <div class="day-progress-bar">
+                                        <div class="day-progress-fill" id="dayProgress"></div>
+                                    </div>
+                                    <div class="day-progress-text" id="dayProgressText">Progreso del día actual</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pollo Animado -->
+            <section class="chicken-section">
+                <div class="chicken-container">
+                    <div class="chicken-stage">
+                        <div class="chicken-image" id="chickenImage">
+                            <div class="chicken-body">🐣</div>
+                            <div class="chicken-effects" id="chickenEffects"></div>
+                        </div>
+                        <h3 class="chicken-name" id="chickenName">Pollito Bebé</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel de Acciones -->
+            <section class="actions-section">
+                <h3 class="actions-title">¡Cuidemos al Pollito!</h3>
+                <div class="actions-grid">
+                    <button id="feedBtn" class="action-card feed-action">
+                        <div class="action-icon draggable" draggable="true" data-type="feed">🌽</div>
+                        <div class="action-info">
+                            <span class="action-label">Alimentar</span>
+                            <span class="action-counter">Comida: <span id="feedCounter">0/4</span></span>
+                        </div>
+                        <div class="action-instruction">Arrastra</div>
+                    </button>
+                    <button id="waterBtn" class="action-card water-action">
+                        <div class="action-icon draggable" draggable="true" data-type="water">💧</div>
+                        <div class="action-info">
+                            <span class="action-label">Dar Agua</span>
+                            <span class="action-counter">Agua: <span id="waterCounter">0/4</span></span>
+                        </div>
+                        <div class="action-instruction">Arrastra</div>
+                    </button>
+                    <button id="medicineBtn" class="action-card medicine-action">
+                        <div class="action-icon" data-type="medicine">💉</div>
+                        <div class="action-info">
+                            <span class="action-label">Medicinar</span>
+                            <span class="action-counter">Medicina: <span id="medicineCounter">0/1</span></span>
+                        </div>
+                        <div class="action-instruction">Haz clic</div>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+
+    <!-- ========= MODALES ========= -->
+
+    <!-- Modal: Semana Completada -->
+    <div id="weekCompleteModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">¡Semana <span id="completedWeek"></span> Completada!</h2>
+            <p id="performanceText">¡Excelente trabajo!</p>
+            <div class="modal-chicken">🐔</div>
+            <button id="continueBtn" class="modal-btn">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Advertencia -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content warning">
+            <h2 class="modal-title">¡Cuidado!</h2>
+            <p id="pendingTasksList">No has completado todas las tareas.</p>
+            <div class="modal-chicken">🤒</div>
+            <button id="continueWarningBtn" class="modal-btn">Entendido</button>
+        </div>
+    </div>
+
+    <!-- Modal: Muerte -->
+    <div id="deathModal" class="modal">
+        <div class="modal-content error">
+            <h2 class="modal-title">Fin del Juego</h2>
+            <p id="deathReason">Tu pollito no ha sobrevivido.</p>
+            <div class="modal-chicken">💀</div>
+            <div id="deathStats"></div>
+            <button id="restartBtn" class="modal-btn">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <!-- Modal: Éxito Final -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <h2 class="modal-title">¡Felicidades!</h2>
+            <p>¡Has criado a tu pollito con éxito!</p>
+            <div class="modal-chicken">🏆</div>
+            <div id="finalStats"></div>
+            <button id="playAgainBtn" class="modal-btn">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <!-- Modal: Confirmar Salida -->
+    <div id="confirmExitModal" class="modal">
+        <div class="modal-content warning">
+            <h2 class="modal-title">¿Volver al Menú?</h2>
+            <p>¿Estás seguro de que quieres salir? Perderás tu progreso actual.</p>
+            <div class="modal-actions">
+                <button id="confirmExitBtn" class="modal-btn">Sí, salir</button>
+                <button id="cancelExitBtn" class="modal-btn">No, quedarme</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
